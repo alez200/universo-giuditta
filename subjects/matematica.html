@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materia - Universo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide {
+            transition: all 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide:not(.active) {
+            opacity: 0;
+            transform: translateX(100%);
+            position: absolute;
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen text-white">
+    <!-- Bottone Home -->
+    <a href="../index.html" class="fixed top-4 left-4 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full transition-all duration-300">
+        ← Torna alla Home
+    </a>
+
+    <!-- Container principale -->
+    <div class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center mb-12" id="subject-title">Materia</h1>
+
+        <!-- Galleria Slide -->
+        <div class="relative h-[600px] overflow-hidden">
+            <div id="slides-container" class="relative h-full">
+                <!-- Le slide verranno inserite qui dinamicamente -->
+            </div>
+
+            <!-- Controlli Slide -->
+            <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+                ←
+            </button>
+            <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+                →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Dati di esempio per le slide
+        const slides = [
+            {
+                title: "La Matematica: Il Linguaggio dell'Universo",
+                content: "La matematica è il linguaggio fondamentale che ci permette di comprendere e descrivere il mondo che ci circonda. Dai numeri naturali alle equazioni differenziali, ogni concetto matematico ci aiuta a decifrare i misteri dell'universo.",
+                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop"
+            },
+            {
+                title: "Algebra e Geometria",
+                content: "L'algebra ci permette di risolvere problemi complessi attraverso equazioni e formule, mentre la geometria ci aiuta a comprendere le forme e le dimensioni nello spazio. Insieme, formano le basi della matematica moderna.",
+                image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop"
+            },
+            {
+                title: "Statistica e Probabilità",
+                content: "La statistica ci aiuta a raccogliere, analizzare e interpretare i dati, mentre la probabilità ci permette di prevedere eventi futuri. Questi strumenti sono fondamentali nella vita quotidiana e nella ricerca scientifica.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop"
+            }
+        ];
+
+        let currentSlide = 0;
+
+        // Funzione per creare le slide
+        function createSlides() {
+            const container = document.getElementById('slides-container');
+            slides.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `slide absolute w-full h-full ${index === 0 ? 'active' : ''}`;
+                slideElement.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full">
+                        <img src="${slide.image}" alt="${slide.title}" class="max-w-2xl w-full mb-8 rounded-lg">
+                        <h2 class="text-3xl font-bold mb-4">${slide.title}</h2>
+                        <p class="text-lg text-center max-w-2xl">${slide.content}</p>
+                    </div>
+                `;
+                container.appendChild(slideElement);
+            });
+        }
+
+        // Funzione per cambiare slide
+        function changeSlide(direction) {
+            const slideElements = document.querySelectorAll('.slide');
+            slideElements[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + direction + slideElements.length) % slideElements.length;
+            
+            slideElements[currentSlide].classList.add('active');
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', () => {
+            createSlides();
+            
+            // Aggiungi event listeners per i pulsanti
+            document.getElementById('prev-slide').addEventListener('click', () => changeSlide(-1));
+            document.getElementById('next-slide').addEventListener('click', () => changeSlide(1));
+            
+            // Aggiorna il titolo della pagina
+            const subject = window.location.pathname.split('/').pop().replace('.html', '');
+            document.getElementById('subject-title').textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+        });
+    </script>
+</body>
+</html> 

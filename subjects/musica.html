@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materia - Universo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide {
+            transition: all 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide:not(.active) {
+            opacity: 0;
+            transform: translateX(100%);
+            position: absolute;
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen text-white">
+    <!-- Bottone Home -->
+    <a href="../index.html" class="fixed top-4 left-4 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full transition-all duration-300">
+        ← Torna alla Home
+    </a>
+
+    <!-- Container principale -->
+    <div class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center mb-12" id="subject-title">Materia</h1>
+
+        <!-- Galleria Slide -->
+        <div class="relative h-[600px] overflow-hidden">
+            <div id="slides-container" class="relative h-full">
+                <!-- Le slide verranno inserite qui dinamicamente -->
+            </div>
+
+            <!-- Controlli Slide -->
+            <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+                ←
+            </button>
+            <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+                →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Dati di esempio per le slide
+        const slides = [
+            {
+                title: "La Musica: Il Linguaggio dell'Anima",
+                content: "La musica è un linguaggio universale che parla direttamente al cuore. Attraverso melodie, ritmi e armonie, esprime emozioni e racconta storie che trascendono le barriere linguistiche.",
+                image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop"
+            },
+            {
+                title: "Teoria Musicale",
+                content: "La teoria musicale ci aiuta a comprendere la struttura della musica, dalle note agli accordi, dai ritmi alle scale. È la grammatica che ci permette di leggere e comporre musica.",
+                image: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&auto=format&fit=crop"
+            },
+            {
+                title: "Storia della Musica",
+                content: "Dalla musica classica al jazz, dal rock al pop, ogni genere musicale racconta una parte della nostra storia. La musica evolve con la società, riflettendo i cambiamenti culturali e sociali.",
+                image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop"
+            }
+        ];
+
+        let currentSlide = 0;
+
+        // Funzione per creare le slide
+        function createSlides() {
+            const container = document.getElementById('slides-container');
+            slides.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `slide absolute w-full h-full ${index === 0 ? 'active' : ''}`;
+                slideElement.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full">
+                        <img src="${slide.image}" alt="${slide.title}" class="max-w-2xl w-full mb-8 rounded-lg">
+                        <h2 class="text-3xl font-bold mb-4">${slide.title}</h2>
+                        <p class="text-lg text-center max-w-2xl">${slide.content}</p>
+                    </div>
+                `;
+                container.appendChild(slideElement);
+            });
+        }
+
+        // Funzione per cambiare slide
+        function changeSlide(direction) {
+            const slideElements = document.querySelectorAll('.slide');
+            slideElements[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + direction + slideElements.length) % slideElements.length;
+            
+            slideElements[currentSlide].classList.add('active');
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', () => {
+            createSlides();
+            
+            // Aggiungi event listeners per i pulsanti
+            document.getElementById('prev-slide').addEventListener('click', () => changeSlide(-1));
+            document.getElementById('next-slide').addEventListener('click', () => changeSlide(1));
+            
+            // Aggiorna il titolo della pagina
+            const subject = window.location.pathname.split('/').pop().replace('.html', '');
+            document.getElementById('subject-title').textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+        });
+    </script>
+</body>
+</html> 

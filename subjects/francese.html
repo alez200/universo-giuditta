@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materia - Universo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide {
+            transition: all 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide:not(.active) {
+            opacity: 0;
+            transform: translateX(100%);
+            position: absolute;
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen text-white">
+    <!-- Bottone Home -->
+    <a href="../index.html" class="fixed top-4 left-4 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full transition-all duration-300">
+        ← Torna alla Home
+    </a>
+
+    <!-- Container principale -->
+    <div class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center mb-12" id="subject-title">Materia</h1>
+
+        <!-- Galleria Slide -->
+        <div class="relative h-[600px] overflow-hidden">
+            <div id="slides-container" class="relative h-full">
+                <!-- Le slide verranno inserite qui dinamicamente -->
+            </div>
+
+            <!-- Controlli Slide -->
+            <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+                ←
+            </button>
+            <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+                →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Dati di esempio per le slide
+        const slides = [
+            {
+                title: "Le Français: La Langue de la Culture",
+                content: "Le français est une langue riche en histoire et en culture, parlée sur les cinq continents. Apprendre le français, c'est découvrir un monde de littérature, d'art et de traditions fascinantes.",
+                image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&auto=format&fit=crop"
+            },
+            {
+                title: "Grammaire et Vocabulaire",
+                content: "La maîtrise de la grammaire et du vocabulaire français est essentielle pour communiquer avec précision et élégance. Chaque règle et chaque mot enrichit notre expression.",
+                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=800&auto=format&fit=crop"
+            },
+            {
+                title: "Culture et Communication",
+                content: "Le français est la langue de la diplomatie, de la mode et de la gastronomie. Apprendre le français, c'est s'ouvrir à une culture qui a influencé le monde entier.",
+                image: "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=800&auto=format&fit=crop"
+            }
+        ];
+
+        let currentSlide = 0;
+
+        // Funzione per creare le slide
+        function createSlides() {
+            const container = document.getElementById('slides-container');
+            slides.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `slide absolute w-full h-full ${index === 0 ? 'active' : ''}`;
+                slideElement.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full">
+                        <img src="${slide.image}" alt="${slide.title}" class="max-w-2xl w-full mb-8 rounded-lg">
+                        <h2 class="text-3xl font-bold mb-4">${slide.title}</h2>
+                        <p class="text-lg text-center max-w-2xl">${slide.content}</p>
+                    </div>
+                `;
+                container.appendChild(slideElement);
+            });
+        }
+
+        // Funzione per cambiare slide
+        function changeSlide(direction) {
+            const slideElements = document.querySelectorAll('.slide');
+            slideElements[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + direction + slideElements.length) % slideElements.length;
+            
+            slideElements[currentSlide].classList.add('active');
+        }
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', () => {
+            createSlides();
+            
+            // Aggiungi event listeners per i pulsanti
+            document.getElementById('prev-slide').addEventListener('click', () => changeSlide(-1));
+            document.getElementById('next-slide').addEventListener('click', () => changeSlide(1));
+            
+            // Aggiorna il titolo della pagina
+            const subject = window.location.pathname.split('/').pop().replace('.html', '');
+            document.getElementById('subject-title').textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+        });
+    </script>
+</body>
+</html> 
