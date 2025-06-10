@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+---
+
+### ✅ **Rule #3: HTML pulito**
+
+**Titolo:** HTML pulito senza Tailwind diretto
+
+```markdown
+- Non inserire classi Tailwind inline nell'HTML.
+- L'HTML deve contenere solo classi semantiche e pulite, es:
+  ```html
+  <h1 class="hero-title">Titolo</h1>
+  <button class="cta-button">Scopri di più</button>

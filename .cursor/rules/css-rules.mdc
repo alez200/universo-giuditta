@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- Non scrivere classi Tailwind direttamente nell'HTML.
+- Crea classi personalizzate in SCSS e compila Tailwind all’interno di queste classi.
+- Esempio corretto:
+  ```scss
+  .hero-title {
+    @apply text-4xl font-bold text-white text-center;
+  }

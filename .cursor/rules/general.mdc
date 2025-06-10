@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- Usa solo HTML per la struttura delle pagine, JavaScript vanilla per l’interattività e SCSS per lo stile.
+- Utilizza Tailwind CSS **solo tramite classi personalizzate nel file SCSS**, non scrivere classi Tailwind direttamente nell'HTML.
+- Ogni componente o sezione deve avere una classe descrittiva (es. `.hero`, `.button-primary`) e le utility Tailwind devono essere applicate a queste classi nel CSS.
+
