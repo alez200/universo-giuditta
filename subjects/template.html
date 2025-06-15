@@ -4,44 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Materia - Universo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .slide {
-            transition: all 0.5s ease-in-out;
-        }
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .slide:not(.active) {
-            opacity: 0;
-            transform: translateX(100%);
-            position: absolute;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="subjects.css">
 </head>
-<body class="bg-black min-h-screen text-white">
+<body>
     <!-- Bottone Home -->
-    <a href="../index.html" class="fixed top-4 left-4 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full transition-all duration-300">
+    <a href="../index.html" class="home-button">
         ← Torna alla Home
     </a>
 
     <!-- Container principale -->
-    <div class="container mx-auto px-4 py-16">
-        <h1 class="text-4xl font-bold text-center mb-12" id="subject-title">Materia</h1>
-        <h2 class="text-4xl font-bold text-center mb-12">La corsa allo spazio</h2>
+    <div class="container">
+        <h1 class="subject-title" id="subject-title">Materia</h1>
+        <h2 class="subtitle">La corsa allo spazio</h2>
 
         <!-- Galleria Slide -->
-        <div class="relative h-[600px] overflow-hidden">
+        <div class="slides-container">
             <div id="slides-container" class="relative h-full">
                 <!-- Le slide verranno inserite qui dinamicamente -->
             </div>
 
             <!-- Controlli Slide -->
-            <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+            <button id="prev-slide" class="nav-button prev-button">
                 ←
             </button>
-            <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full">
+            <button id="next-slide" class="nav-button next-button">
                 →
             </button>
         </div>
@@ -74,12 +61,12 @@
             const container = document.getElementById('slides-container');
             slides.forEach((slide, index) => {
                 const slideElement = document.createElement('div');
-                slideElement.className = `slide absolute w-full h-full ${index === 0 ? 'active' : ''}`;
+                slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
                 slideElement.innerHTML = `
-                    <div class="flex flex-col items-center justify-center h-full">
-                        <img src="${slide.image}" alt="${slide.title}" class="max-w-2xl w-full mb-8 rounded-lg">
-                        <h2 class="text-3xl font-bold mb-4">${slide.title}</h2>
-                        <p class="text-lg text-center max-w-2xl">${slide.content}</p>
+                    <div class="slide-content">
+                        <img src="${slide.image}" alt="${slide.title}" class="slide-image">
+                        <h2 class="slide-title">${slide.title}</h2>
+                        <p class="slide-text">${slide.content}</p>
                     </div>
                 `;
                 container.appendChild(slideElement);

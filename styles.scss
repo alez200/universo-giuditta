@@ -1,6 +1,12 @@
 // Variabili
 $primary-color: #000000;
 $text-color: #ffffff;
+:root{
+  --font-primary: 'Righteous', cursive;
+  --font-secondary: 'Rubik 80s Fade', cursive;
+}
+
+
 
 // Mixins
 @mixin flex-center {
@@ -31,6 +37,7 @@ $text-color: #ffffff;
 // Stili base
 body {
   background-color: $primary-color;
+  font-family: var(--font-primary);
   background-image: url(./resources/images/sky-space-dark-galaxy.jpg);
   background-size: cover;
   background-position: center;
@@ -50,7 +57,7 @@ body {
 // Titolo
 .main-title {
   @include absolute-center;
-  font-family: 'Rubik 80s Fade', cursive;
+  font-family: var(--font-secondary);
   font-size: 6.75rem;
   font-weight: bold;
   color: #fff;

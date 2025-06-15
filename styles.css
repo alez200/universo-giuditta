@@ -1,3 +1,8 @@
+:root {
+  --font-primary: "Righteous", cursive;
+  --font-secondary: "Rubik 80s Fade", cursive;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -10,6 +15,7 @@
 }
 body {
   background-color: #000000;
+  font-family: var(--font-primary);
   background-image: url(./resources/images/sky-space-dark-galaxy.jpg);
   background-size: cover;
   background-position: center;
@@ -32,7 +38,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Rubik 80s Fade", cursive;
+  font-family: var(--font-secondary);
   font-size: 6.75rem;
   font-weight: bold;
   color: #fff;
