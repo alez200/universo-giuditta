@@ -6,10 +6,9 @@ const subjects = [
 
 // Configurazione
 const config = {
-    containerRadius: 250, // Raggio del cerchio in pixel
-    centerX: 300,        // Centro X del container
-    centerY: 300,        // Centro Y del container
-    wordSpacing: 30      // Spazio tra le parole in gradi
+    containerRadius: 400, // Raggio del cerchio in pixel
+    centerX: window.innerWidth / 2,  // Centro X della finestra
+    centerY: window.innerHeight / 2, // Centro Y della finestra
 };
 
 // Funzione per convertire gradi in radianti
@@ -20,11 +19,9 @@ function degreesToRadians(degrees) {
 // Funzione per posizionare le parole in cerchio
 function positionWords() {
     const container = document.getElementById('subjects-container');
-    const svg = document.getElementById('connections');
     
     // Rimuovi elementi esistenti
     container.innerHTML = '';
-    svg.innerHTML = '';
 
     // Calcola l'angolo tra ogni parola
     const angleStep = 360 / subjects.length;
@@ -37,7 +34,7 @@ function positionWords() {
 
         // Crea l'elemento parola
         const wordElement = document.createElement('div');
-        wordElement.className = 'subject-word absolute text-white text-xl cursor-pointer transform -translate-x-1/2 -translate-y-1/2';
+        wordElement.className = 'subject-word';
         wordElement.style.left = `${x}px`;
         wordElement.style.top = `${y}px`;
         wordElement.textContent = subject;
@@ -49,25 +46,6 @@ function positionWords() {
         });
 
         container.appendChild(wordElement);
-
-        // Crea la linea di connessione
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        const startX = config.centerX;
-        const startY = config.centerY;
-        const endX = x;
-        const endY = y;
-
-        // Crea una curva di Bezier per la linea
-        const controlX = (startX + endX) / 2;
-        const controlY = (startY + endY) / 2 - 50;
-
-        const pathData = `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`;
-        line.setAttribute('d', pathData);
-        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.3)');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('fill', 'none');
-
-        svg.appendChild(line);
     });
 }
 
@@ -83,6 +61,13 @@ function navigateToSubject(subject) {
         window.location.href = `subjects/${subject}.html`;
     }, 1000);
 }
+
+// Aggiorna le posizioni quando la finestra viene ridimensionata
+window.addEventListener('resize', () => {
+    config.centerX = window.innerWidth / 2;
+    config.centerY = window.innerHeight / 2;
+    positionWords();
+});
 
 // Inizializza quando il DOM è caricato
 document.addEventListener('DOMContentLoaded', () => {

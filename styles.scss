@@ -31,6 +31,10 @@ $text-color: #ffffff;
 // Stili base
 body {
   background-color: $primary-color;
+  background-image: url(./resources/images/sky-space-dark-galaxy.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
   @include flex-center;
   overflow: hidden;
@@ -46,24 +50,21 @@ body {
 // Titolo
 .main-title {
   @include absolute-center;
-  font-size: 3.75rem;
+  font-family: 'Rubik 80s Fade', cursive;
+  font-size: 6.75rem;
   font-weight: bold;
-  color: $text-color;
-  animation: fadeIn 1s ease-out forwards;
+  color: #fff;
+  line-height: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
 }
 
 // Container materie
 .subjects-container {
   @include absolute-center;
-  width: 600px;
-  height: 600px;
-}
-
-// SVG connessioni
-.connections-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
@@ -71,10 +72,16 @@ body {
 
 // Animazioni parole
 .subject-word {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
   transition: all 0.3s ease;
+  text-transform: capitalize;
   
   &:hover {
-    transform: scale(1.1);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: scale(1.2) translate(-50%, -50%);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
   }
 } 
