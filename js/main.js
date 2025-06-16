@@ -1,7 +1,7 @@
 // Array delle materie
 const subjects = [
     'matematica', 'scienze', 'geografia', 'storia', 'letteratura',
-    'motoria', 'arte', 'inglese', 'francese', 'tecnologia', 'musica'
+    'motoria', 'arte', 'inglese', 'francese', 'tecnologia', 'musica','latino'
 ];
 
 // Configurazione
