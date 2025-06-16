@@ -1,6 +1,6 @@
 :root {
-  --font-primary: "Righteous", cursive;
-  --font-secondary: "Rubik 80s Fade", cursive;
+  --font-primary: "Righteous", Arial, Helvetica, sans-serif;
+  --font-secondary: "Rubik 80s Fade", Arial, Helvetica, sans-serif;
 }
 
 @keyframes fadeIn {
@@ -70,7 +70,7 @@ body {
   text-transform: capitalize;
 }
 .subject-word:hover {
-  transform: scale(1.2) translate(-50%, -50%);
+  transform: scale(1.5);
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
