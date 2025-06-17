@@ -1,5 +1,5 @@
 :root {
-  --font-primary: "Righteous", Arial, Helvetica, sans-serif;
+  --font-primary: "IBM Plex Sans",Arial, Helvetica, sans-serif;
   --font-secondary: "Rubik 80s Fade", Arial, Helvetica, sans-serif;
 }
 
@@ -35,7 +35,7 @@ body {
 
 .main-title {
   font-family: var(--font-secondary);
-  font-size: 2.75rem;
+  font-size: clamp(27px, 10vw, 67px);
   font-weight: bold;
   color: #fff;
   line-height: 0;
@@ -48,7 +48,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 6.75rem;
     line-height: 0;
     margin: 0;
     padding: 0;
