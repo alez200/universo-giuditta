@@ -41,6 +41,7 @@ body {
   line-height: 0;
   width: 100%;
   text-align: center;
+  margin: 12.4rem auto;
 }
 @media (min-width: 1024px) {
   .main-title {
@@ -78,6 +79,36 @@ body {
 .subject-word:hover {
   transform: scale(1.5);
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-height: 900px) {
+  .subject-word {
+    position: static;
+    width: 50%;
+    text-align: center;
+    padding: 1rem;
+  }
+  .subjects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .subject-word {
+    position: static;
+    width: calc(50% - 2rem);
+    text-align: center;
+    padding: 1rem;
+  }
+  .subjects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
