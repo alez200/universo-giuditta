@@ -61,7 +61,8 @@ body {
   line-height: 0;
   width: 100%;
   text-align: center;
-  margin: 12.4rem auto;
+  margin-top: 8.4rem;
+  margin-bottom: 2.4rem;
   
   @media (min-width: 1024px) {
     @include absolute-center;
@@ -101,7 +102,7 @@ body {
 @media screen and  (max-height: 900px) {
   .subject-word {
     position: static;
-    width:50%;
+    width: calc(50% - 2rem);
     text-align: center;
     padding: 1rem; 
   }
